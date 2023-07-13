@@ -1,0 +1,18 @@
+{% extends "base/base.html"%} 
+{% block start %} 
+<h1>Hello this is my product page </h1>
+{% for i in y %}
+<div class="d-inline-flex p-2">
+
+    <div class="container" style="padding-left:50px;">
+            <figure class="card card-product-grid">
+                <div class="img-wrap"> <img src="/media/{{i.image}}"> </div>
+                <figcaption class="info-wrap border-top" >
+                    <a href="#" class="title" style="text-align: center;">{{x.price}}</a>
+                    <div class="price mt-2" style="text-align: center;">${{x.product_name}}</div> 
+                </figcaption>
+            </figure>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

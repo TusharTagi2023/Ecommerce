@@ -1,21 +1,20 @@
 {% extends "base/base.html"%}
 
 {%block start%}
-<h1>We are working on background</h1>
+<center><h1>Thanks For Comming <style>text-agile:centre</style></h1></center>
 {% for i in data %}
-<div class="container d-flex">
-    <div class="row">
-        <div class="col-md-3">
-            <figure class="card card-product-grid">
-                <div class="img-wrap"> <img src="../images/items/5.jpg"> </div>
-                <figcaption class="info-wrap border-top">
-                    <a href="#" class="title">Bell &amp; Ross Nightlum</a>
-                    <div class="price mt-2">$299.00</div> <!-- price-wrap.// -->
-                </figcaption>
-            </figure> <!-- card // -->
-        </div> <!-- col.// -->
+
+    <div class="d-inline-flex p-2">
+
+        <div class="container" style="padding-left:50px;">
+                <figure class="card card-product-grid">
+                    <div class="img-wrap"> <img src="/media/{{i.category_image}}"> </div>
+                    <figcaption class="info-wrap border-top" >
+                        <a href="{% url 'product_Detail_page' i.category_name %}" class="title" style="text-align: center;"> {{i.category_name}}</a>
+                    </figcaption>
+                </figure>
+        </div>
     </div>
 
-    </div>
     {% endfor%}
-{%endblock%}s
+{%endblock%}
