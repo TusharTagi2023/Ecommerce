@@ -1,6 +1,6 @@
 {% extends "base/base.html"%} 
 {% block start %} 
-<h1>Hello this is my product page </h1>
+<center><h1>Here our products<style>text-agile:centre</style></h1></center>
 {% for i in y %}
 <div class="d-inline-flex p-2">
 
@@ -8,8 +8,8 @@
             <figure class="card card-product-grid">
                 <div class="img-wrap"> <img src="/media/{{i.image}}"> </div>
                 <figcaption class="info-wrap border-top" >
-                    <a href="#" class="title" style="text-align: center;">{{x.price}}</a>
-                    <div class="price mt-2" style="text-align: center;">${{x.product_name}}</div> 
+                    <a href="{% url 'Show_page' i.identify_no %}" class="title" style="text-align: center;">{{x.product_name}}</a>
+                    <div class="price mt-2" style="text-align: center;">${{x.price}}</div> 
                 </figcaption>
             </figure>
     </div>

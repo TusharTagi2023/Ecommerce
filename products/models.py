@@ -35,4 +35,5 @@ class Product (BaseModel1):
 
 class Product_Image(BaseModel1):
     product=models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_images")
+    identify_no=models.BigIntegerField(default=0)
     image=models.ImageField(upload_to='product')

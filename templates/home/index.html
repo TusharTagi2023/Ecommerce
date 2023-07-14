@@ -10,7 +10,7 @@
                 <figure class="card card-product-grid">
                     <div class="img-wrap"> <img src="/media/{{i.category_image}}"> </div>
                     <figcaption class="info-wrap border-top" >
-                        <a href="{% url 'product_Detail_page' i.category_name %}" class="title" style="text-align: center;"> {{i.category_name}}</a>
+                        <a href="{% url 'product_Detail_page' i.slug %}" class="title" style="text-align: center;"> {{i.category_name}}</a>
                     </figcaption>
                 </figure>
         </div>
