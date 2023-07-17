@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import Product,Product_Image
-from cart.models import Cart_items
+from cart.models import Items,Cart
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -11,20 +12,22 @@ def product(request, inp):
     return render(request, "product/product.html",{"x":product,"y":img})
 
 def show(request,inp):
+    img=Product_Image.objects.get(identify_no=inp)
     if request.method=='POST':
-        print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
         size=request.POST.get('size')
         quantity=request.POST.get('num')
         iddd=img.uid
-        Cart_items(item_id=iddd,items_no=quantity,varient=size)
+        user=request.user
+        adding_to_cart(user,size,quantity,iddd)
 
-
-
-
-
-
-    img=Product_Image.objects.get(identify_no=inp)
     return render(request,"product/details.html",{'a':img})
+
+@login_required
+def adding_to_cart(usr,size,num,idd):
+    Cart(user=usr,item_id=idd).save()
+    print('Workinnnnnnnnnnnnnnnnnnnnnnnnng')
+    Cart.cart_items(items_no=num,varient=size).save()
+
 
 
 
