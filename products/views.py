@@ -19,14 +19,23 @@ def show(request,inp):
         iddd=img.uid
         user=request.user
         adding_to_cart(user,size,quantity,iddd)
-
+        return redirect('/')
     return render(request,"product/details.html",{'a':img})
 
-@login_required
+
 def adding_to_cart(usr,size,num,idd):
-    Cart(user=usr,item_id=idd).save()
-    print('Workinnnnnnnnnnnnnnnnnnnnnnnnng')
-    Cart.cart_items(items_no=num,varient=size).save()
+    try:
+        id=Cart.objects.get(item_id=idd)
+        chmg=Items.objects.get(cart=id)
+        num=int(num)+chmg.items_no
+        size=size+','+chmg.varient
+        id.delete()
+        Items(cart=id,items_no=num,varient=size).save()
+    except:
+        Cart(user=usr,item_id=idd).save()
+        id=Cart.objects.get(item_id=idd)
+        Items(cart=id,items_no=num,varient=size).save()
+        return
 
 
 
