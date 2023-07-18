@@ -29,6 +29,7 @@ def adding_to_cart(usr,size,num,idd):
         chmg=Items.objects.get(cart=id)
         num=int(num)+chmg.items_no
         size=size+','+chmg.varient
+
         id.delete()
         Items(cart=id,items_no=num,varient=size).save()
     except:

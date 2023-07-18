@@ -85,7 +85,11 @@ $(document).ready(function() {
 					<div class="widget-header icontext">
 						<a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-user">user</i></a>
 						<div class="text">
-							{%if login%}
+							{% if user.is_authenticated %}
+							<span class="text-muted">Welcome {{user}}</span>
+							<div> 
+								<a href="{% url "LoG" %}">LoG_Out</a> |  
+							</div>
 							{%else%}
 							<span class="text-muted">Welcome!</span>
 							<div> 

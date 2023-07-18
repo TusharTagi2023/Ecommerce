@@ -14,9 +14,9 @@ def login_page(request):
         usr_obj=User.objects.filter(username = U_name)
         if not usr_obj.exists():    
             messages.warning(request, "Account not exist.")
-            return HttpResponseRedirect(request.path_info)
-        if not usr_obj[0].profile.is_verified:
-            messages.warning(request, "Email is not verified")
+            if not usr_obj[0].profile.is_verified:
+                messages.warning(request, "Email is not verified")
+                return HttpResponseRedirect(request.path_info)
             return HttpResponseRedirect(request.path_info)
 
 
@@ -58,6 +58,10 @@ def accont_activation(request, email_token):
         return redirect('LogIn')
     except Exception as e:
         return HttpResponse("Invalid token please recheck")
+    
+def logout_view(request):
+    logout(request)
+    return redirect('/')
 
 
 
