@@ -144,3 +144,7 @@ EMAIL_HOST_USER='demoprojects134@gmail.com'
 EMAIL_HOST_PASSWORD='nbstlzysupomeeom'
 EMAIL_USE_TLS=True
 EMAIL_PORT=587
+
+
+RAZORPAY_API_KEY = 'rzp_test_FJnGVnTzsZtDHD'
+RAZORPAY_API_SECRET = '8ZDyKnzxPChROgwepDGn4IHu'
