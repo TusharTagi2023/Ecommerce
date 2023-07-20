@@ -6,4 +6,5 @@ urlpatterns = [
     path('register', user_regs, name="Register"),
     path("Validatiod/<email_token>",accont_activation, name="activation_page"),
     path('lOg',logout_view ,name="LoG"),
+    path('profile',profile ,name="Profile"),
 ]

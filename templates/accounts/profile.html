@@ -1,0 +1,107 @@
+{% extends "base/base.html"%} 
+{% block start %} 
+<section style="background-color: #eee;">
+    <div class="container py-5">  
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+                    <img id="profile_image"  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"  
+                    class="rounded-circle img-fluid" style="width: 150px;">
+                <form id="photo_id"> 
+                    <input type="file" name="myImage" accept="image/png, image/gif, image/jpeg" />
+                    <input type="submit" value="Submit"> 
+                </form>        
+              <h5 class="my-3">{{user.username}}</h5>
+              <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Full Name</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{user.first_name}} {{user.last_name}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Email</p>
+                </div>
+                <div  id="new" class="col-sm-9">
+                  <p class="text-muted mb-0">{{user.email}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Phone</p>
+                </div>
+                <div class="col-sm-9">
+                    <form id="contact" method="POST">
+                        {% csrf_token %}
+                        <input type="number" id="fname" name="mynumber" value=""> <input type="submit" value="Submit">
+                    </form>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Gender</p>
+                </div>
+                <div class="col-sm-9">
+                    <form id="gndr" method="POST">
+                    <select name='size'>
+                        <option value="S">Male</option>
+                        <option value="M">Female</option>
+                        <option value="L">Other</option>
+                      </select>
+                      <input type="submit" value="Submit">
+                    </form>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Address</p>
+                </div>
+                <div class="col-sm-9">
+                    <form id="residence" method="POST">
+                        <input type="text" id="fname" name="mynumber" value=""> <input type="submit" value="Submit">
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    var usr_img="{{details.profile_image}}"
+    var usr_mail="{{user.email}}"
+    var usr_no="{{details.contact_no}}"
+    var usr_gender="{{details.gender}}"
+    var usr_address="{{details.address}}"
+    if(usr_img){
+        document.getElementById('profile_image').src="/media/{{details.profile_image}}"
+        document.getElementById('photo_id').style.display='none'
+    }
+    if(usr_mail){
+    document.getElementById('new').innerHTML=bb;
+    }
+    if(usr_no){
+        document.getElementById('contact').innerHTML=usr_no;}
+    if(usr_gender){
+        document.getElementById('gndr').innerHTML=bb;}
+    if(usr_address){
+        document.getElementById('residence').innerHTML=bb;}
+  </script>
+
+  {% endblock %}

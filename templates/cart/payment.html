@@ -1,33 +1,38 @@
-{% extends "base/base.html"%} 
-{% block start %} 
-<script> src="https://checkout.razorpay.com/v1/checkout.js"</script>
-    <script>
-        var options = {
-            "key": "rzp_test_FJnGVnTzsZtDHD",
-            "amount": "10000",
-            "currency": "INR",
-            "name": "ecomm",
-            "order_id": "F1_Order",
-            "handler": function(response){
-                alert(response.razorpay_payment_id);
-                alert(response.razorpay_order_id);
-                alert(response.razorpay_signature);
-            }
-        };
-        var rzp1 = new Razorpay(options);
-        rzp1.on('payment.failed', function(response){
-            alert(response.error.code);
-            alert(response.error.description);
-            alert(response.error.source);
-            alert(response.error.step);
-            alert(response.error.reason);
-            alert(response.error.metadata.order_id);
-            alert(response.error.metadata.payment_id);
-        });
-        document.getElementById('rzp-button1').onclick = function(e){
-            rzp1.open()
-            e.preventDefault();
-        }
-    </script>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Razorpay Payment</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <h1>Make a Payment</h1>
+    <button id="rzp-button">Pay Now</button>
 
-{% endblock %}
+    <script>
+
+        document.getElementById('rzp-button').onclick = function () {
+            var options = {
+                "key": "rzp_test_FJnGVnTzsZtDHD",
+                "amount": amount,
+                "currency": currency,
+                "name": "HDF Company Name",
+                "description": "Payment for Order",
+                "image": "your_logo_url",
+                "order_id": "gdsjhgffs",
+                "handler": function (response){
+                    // Handle the success response
+                    console.log(response);
+                },
+                "prefill": {
+                    "name": "John Doe",
+                    "email": "john@example.com",
+                    "contact": "+1234567890"
+                }
+            };
+
+            var rzp = new Razorpay(options);
+            rzp.open();
+        };
+    </script>
+</body>
+</html>

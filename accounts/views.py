@@ -7,8 +7,7 @@ from .models import Profile
 
 # Create your views here.
 def login_page(request):
-    if request.method=='POST':
-        
+    if request.method=='POST':        
         U_name=request.POST.get('usrname')
         Pswrd=request.POST.get('pswrd')
         usr_obj=User.objects.filter(username = U_name)
@@ -18,8 +17,7 @@ def login_page(request):
                 messages.warning(request, "Email is not verified")
                 return HttpResponseRedirect(request.path_info)
             return HttpResponseRedirect(request.path_info)
-
-
+        
         usr_obj=authenticate(username=U_name,password=Pswrd)
         if usr_obj:
             login(request, usr_obj)
@@ -63,5 +61,21 @@ def logout_view(request):
     logout(request)
     return redirect('/')
 
+
+
+
+def profile(request):
+    user=request.user
+    details=Profile.objects.get(user=user)
+    if request.method=='POST':
+        if request.POST.get('mynumber'):
+            numbr= request.POST.get('mynumber')
+            details.contact_no=numbr
+            details.save()
+            return redirect('/')
+            
+        
+
+    return render (request, 'accounts/profile.html',{'user':user,'details':details})
 
 

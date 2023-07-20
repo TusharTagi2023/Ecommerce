@@ -32,16 +32,6 @@ def create_order(request):
     amount = 10000  # Amount in paise (Example: ₹100)
     currency = 'INR'
     receipt = 'order_rhzjghhjghjgfghfghgh'  # Unique order ID or receipt
-
-    data = {
-        'amount': amount,
-        'currency': currency,
-        'receipt': receipt,
-        'payment_capture': 1  # Auto-capture payment after successful payment
-    }
-
-    order = client.order.create(data=data)
-
-    return render(request, 'payment.html', {'order': order})
+    return render(request, 'cart/payment.html', {'amount':amount, 'currency': currency, 'receipt': receipt, 'payment_capture': 1})
 
     

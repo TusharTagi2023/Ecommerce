@@ -11,6 +11,9 @@ class Profile(BaseModel1):
     is_verified=models.BooleanField(default=False)
     email_token=models.CharField(max_length=100, null=True, blank=True)
     profile_image=models.ImageField(upload_to="profile")
+    contact_no=models.PositiveBigIntegerField(null=True, blank=True)
+    gender=models.CharField(max_length=10, null=True, blank=True)
+    address=models.CharField(max_length=100, null=True, blank=True)
 
 
 @receiver(post_save, sender=User)
