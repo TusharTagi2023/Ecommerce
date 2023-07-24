@@ -13,15 +13,14 @@ def product(request, inp):
 
 def show(request,inp):
     img=Product_Image.objects.get(identify_no=inp)
-    try:
-        if request.method=='POST':
+    if request.method=='POST':
+        if request.user.is_authenticated:
             size=request.POST.get('size')
             quantity=request.POST.get('num')
             iddd=img.uid
             user=request.user
             adding_to_cart(user,size,quantity,iddd)
             return redirect('/')
-    except:
         return redirect('LogIn')
     return render(request,"product/details.html",{'a':img})
 

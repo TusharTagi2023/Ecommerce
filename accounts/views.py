@@ -68,14 +68,24 @@ def profile(request):
     user=request.user
     details=Profile.objects.get(user=user)
     if request.method=='POST':
-        if request.POST.get('mynumber'):
-            numbr= request.POST.get('mynumber')
-            details.contact_no=numbr
-            details.save()
-            return redirect('/')
-            
+        details.contact_no=request.POST.get('mynumber')
+        details.gender=request.POST.get('add_gender')
+        details.address=request.POST.get('add_address')
+        details.save()
+        return HttpResponseRedirect(request.path_info)
         
-
     return render (request, 'accounts/profile.html',{'user':user,'details':details})
+
+def add_img(request):
+    user=request.user
+    details=Profile.objects.get(user=user)
+    if request.method=='POST':
+        details.profile_image=request.FILES.get('myImage')
+        details.save()
+        return redirect('Profile')
+    return redirect('Profile')
+    
+
+
 
 

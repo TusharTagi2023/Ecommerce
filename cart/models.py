@@ -1,6 +1,8 @@
+from django.views import View
 from django.db import models
 from base.models import BaseModel1
 from django.contrib.auth.models import User
+from django.http import JsonResponse
 
 
 class Cart(BaseModel1):

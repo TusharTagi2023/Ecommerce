@@ -1,8 +1,12 @@
 from django.shortcuts import render,redirect
 from products.models import Product_Image
 from .models import Cart,Items
-from razorpay import Client
 from django.conf import settings
+import stripe
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+from django.http import HttpResponse
+from django.urls import reverse
 
 
 # Create your views here.
@@ -27,11 +31,28 @@ def remov(request,inp):
     return redirect('Cart')
 
 
-def create_order(request):
-    client = Client(auth=(settings.RAZORPAY_API_KEY, settings.RAZORPAY_API_SECRET))
-    amount = 10000  # Amount in paise (Example: ₹100)
-    currency = 'INR'
-    receipt = 'order_rhzjghhjghjgfghfghgh'  # Unique order ID or receipt
-    return render(request, 'cart/payment.html', {'amount':amount, 'currency': currency, 'receipt': receipt, 'payment_capture': 1})
 
-    
+# Set your Stripe secret API key
+stripe.api_key = 'sk_test_51NXKiQSFfzLEFTUhmGt6Z3cngIyi3ByROUjBzAgTNFMZd2j1Pd2qCUKMVO7UiaRVWmk1L5Zvu7axXzEEfHbjSaO9006FBdEyj4'
+
+def create_checkout_session(request):
+    if request.method == 'POST':
+        try:
+            checkout_session = stripe.checkout.Session.create(
+                line_items=[
+                    {
+                        # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+                        'price': 'price_1NXKr4SFfzLEFTUhLD3V5oDO',  # Replace with your actual Price ID
+                        'quantity': 1,
+                    },
+                ],
+                mode='payment',
+                success_url=request.build_absolute_uri('/success.html'),
+                cancel_url=request.build_absolute_uri('/cancel.html'),
+            )
+        except Exception as e:
+            return HttpResponse(str(e), status=500)
+
+        return redirect(checkout_session.url, code=303)
+    else:
+        return HttpResponse("Method not allowed", status=405)

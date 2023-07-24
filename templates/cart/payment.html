@@ -1,38 +1,22 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Razorpay Payment</title>
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-</head>
-<body>
-    <h1>Make a Payment</h1>
-    <button id="rzp-button">Pay Now</button>
-
-    <script>
-
-        document.getElementById('rzp-button').onclick = function () {
-            var options = {
-                "key": "rzp_test_FJnGVnTzsZtDHD",
-                "amount": amount,
-                "currency": currency,
-                "name": "HDF Company Name",
-                "description": "Payment for Order",
-                "image": "your_logo_url",
-                "order_id": "gdsjhgffs",
-                "handler": function (response){
-                    // Handle the success response
-                    console.log(response);
-                },
-                "prefill": {
-                    "name": "John Doe",
-                    "email": "john@example.com",
-                    "contact": "+1234567890"
-                }
-            };
-
-            var rzp = new Razorpay(options);
-            rzp.open();
-        };
-    </script>
-</body>
+  <head>
+    <title>Buy cool new product</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://js.stripe.com/v3/"></script>
+  </head>
+  <body>
+    <section>
+      <div class="product">
+        <img src="https://i.imgur.com/EHyR2nP.png" alt="The cover of Stubborn Attachments" />
+        <div class="description">
+          <h3>Stubborn Attachments</h3>
+          <h5>$20.00</h5>
+        </div>
+      </div>
+      <form action="{%url'Payment'%}" method="POST">
+        <button type="submit" id="checkout-button">Checkout</button>
+      </form>
+    </section>
+  </body>
 </html>
