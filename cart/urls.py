@@ -5,6 +5,9 @@ urlpatterns = [
     path("cart", cart ,name="Cart"),
     path("paymnt", create_checkout_session ,name="Payment"),
     path("Dlt/<inp>", remov ,name="move"),
+    path("Sucess", Success ,name="success"),
+    path("Delivery", delivery ,name="Delivery"),
+
     
 ]
 

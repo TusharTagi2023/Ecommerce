@@ -1,18 +1,21 @@
 {% extends "base/base.html"%} 
 {% block start %} 
 <center><h1>Here our products<style>text-agile:centre</style></h1></center>
-{% for i in y %}
+{% for x in y %}
+<h1></h1>
+{% for i in x %}
 <div class="d-inline-flex p-2">
 
     <div class="container" style="padding-left:50px;">
             <figure class="card card-product-grid">
-                <div class='bg-image hover-zoom ripple ripple-surface ripple-surface-light'  data-mdb-ripple-color="light"> <img src="/media/{{i.image}}"> </div>
+                <div class="img-wrap"> <img src="/media/{{i.image}}"> </div>
                 <figcaption class="info-wrap border-top" >
-                    <a href="{% url 'Show_page' i.identify_no %}" class="title" style="text-align: center;">{{x.product_name}}</a>
-                    <div class="price mt-2" style="text-align: center;">${{x.price}}</div> 
+                    <a href="{% url 'Show_page' i.identify_no %}" class="title" style="text-align: center;">{{i.product.product_name}}</a>
+                    <div class="price mt-2" style="text-align: center;">${{i.product.price}}</div> 
                 </figcaption>
             </figure>
     </div>
 </div>
+{% endfor %}
 {% endfor %}
 {% endblock %}

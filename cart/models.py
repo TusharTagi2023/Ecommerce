@@ -8,6 +8,7 @@ from django.http import JsonResponse
 class Cart(BaseModel1):
     user=models.ForeignKey(User,on_delete=models.CASCADE, related_name='user_cart')
     item_id= models.CharField(max_length=100,null=True, blank=True)
+    is_paid=models.BooleanField(default=False)
 
 
 class Items(BaseModel1):
